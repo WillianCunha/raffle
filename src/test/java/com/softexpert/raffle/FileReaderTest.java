@@ -8,8 +8,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
-public class RaffleFileReaderTest {
-	private RaffleFileReader raffleFileReader = new RaffleFileReader();
+public class FileReaderTest {
+	private FileReader raffleFileReader = new FileReader();
 
 	@Test
 	public void simpleFileReaderOne() throws IOException {
