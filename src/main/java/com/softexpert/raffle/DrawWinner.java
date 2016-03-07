@@ -1,17 +1,23 @@
 package com.softexpert.raffle;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class DrawWinner {
+	
 	private Random randomGenerator = new Random();
 
-	public String selectWinner(List<String> nameList, int seed) {
-		if (seed != 0) {
-			randomGenerator.setSeed(seed);
-			return nameList.get(randomGenerator.nextInt(nameList.size() - 1));
-		} else
-			return nameList.get(randomGenerator.nextInt(nameList.size() - 1));
+	public List<String> buildWinner(List<String> participants, int numberOfWinners) {
+		List<String> winners = new ArrayList<String>();
+		while (winners.size() != numberOfWinners)
+			winners.add(getRandomWinner(participants));
+		return winners;
+	}
+
+	private String getRandomWinner(List<String> participantes) {
+		int randomNumber = randomGenerator.nextInt(participantes.size());
+		return participantes.get(randomNumber);
 	}
 
 }

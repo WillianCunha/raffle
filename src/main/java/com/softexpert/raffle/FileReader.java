@@ -10,8 +10,8 @@ import java.util.List;
 
 public class FileReader {
 
-	public List<String> readFile(String filename) throws IOException {
-		InputStream inputStream = new FileInputStream(filename);
+	public List<String> readFile(String fileName) throws IOException {
+		InputStream inputStream = new FileInputStream(fileName);
 		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 		
 		return readLines(new BufferedReader(inputStreamReader));
