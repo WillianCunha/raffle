@@ -39,6 +39,7 @@ public class DrawWinnerTest {
 	public void TenWinnersDrawing() throws IOException {
 		List<String> nameList = fileReader.readFile("src/test/resources/com/softexpert/name-list-02.txt");
 		List<String> winners = drawWinner.buildWinner(nameList, 10);
+
 		MatcherAssert.assertThat(winners.get(0), Matchers.isIn(nameList));
 		MatcherAssert.assertThat(winners.get(1), Matchers.isIn(nameList));
 		MatcherAssert.assertThat(winners.get(2), Matchers.isIn(nameList));
