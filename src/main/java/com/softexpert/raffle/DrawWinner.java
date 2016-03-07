@@ -15,12 +15,11 @@ public class DrawWinner {
 		while (winners.size() != numberOfWinners) {
 			winnerCandidate = getRandomWinner(participants);
 			boolean isOnTheList = false;
-			for (String winner : winners) {
+			for (String winner : winners)
 				if (winner == winnerCandidate) {
 					isOnTheList = true;
 					break;
 				}
-			}
 			if (!isOnTheList)
 				winners.add(winnerCandidate);
 		}

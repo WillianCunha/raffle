@@ -67,4 +67,12 @@ public class DrawWinnerTest {
 		MatcherAssert.assertThat(winners, Matchers.hasSize(100));
 	}
 	
+	@Test
+	public void overThousandWinnersDrawing() throws IOException {
+		List<String> nameList = fileReader.readFile("src/test/resources/com/softexpert/name-list-03.txt");
+		Collection<String> winners = drawWinner.buildWinner(nameList, 1113);
+		MatcherAssert.assertThat(winners, Matchers.hasSize(1113));
+		
+	}
+	
 }
