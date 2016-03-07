@@ -13,18 +13,17 @@ public class FileReader {
 	public List<String> readFile(String fileName) throws IOException {
 		InputStream inputStream = new FileInputStream(fileName);
 		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-		
+
 		return readLines(new BufferedReader(inputStreamReader));
 	}
 
 	private List<String> readLines(BufferedReader bufferedReader) throws IOException {
 		List<String> results = new ArrayList<String>();
 		String value = "";
-		
+
 		while ((value = bufferedReader.readLine()) != null)
 			results.add(value);
-		
+
 		return results;
 	}
-
 }
