@@ -1,29 +1,16 @@
 package com.softexpert.raffle;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 
 public class FileReader {
 
-	public List<String> readFile(String fileName) throws IOException {
-		InputStream inputStream = new FileInputStream(fileName);
-		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-
-		return readLines(new BufferedReader(inputStreamReader));
+	public List<String> readFile(File file) throws IOException {
+		return Files.readLines(file, Charsets.UTF_8);
 	}
 
-	private List<String> readLines(BufferedReader bufferedReader) throws IOException {
-		List<String> results = new ArrayList<String>();
-		String value = "";
-
-		while ((value = bufferedReader.readLine()) != null)
-			results.add(value);
-
-		return results;
-	}
 }

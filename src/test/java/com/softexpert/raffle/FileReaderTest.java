@@ -1,7 +1,7 @@
 package com.softexpert.raffle;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hamcrest.MatcherAssert;
@@ -13,8 +13,7 @@ public class FileReaderTest {
 
 	@Test
 	public void simpleFileReaderOne() throws IOException {
-		List<String> nameList = new ArrayList<String>();
-		nameList = fileReader.readFile("src/test/resources/com/softexpert/name-list-01.txt");
+		List<String> nameList = fileReader.readFile(new File("src/test/resources/com/softexpert/name-list-01.txt"));
 		MatcherAssert.assertThat(nameList,
 				Matchers.contains("ABNER MARCOS ORLAMUNDER", "ABRAAO PUZAK", "ADAEL OURIQUES DA CONCEICAO",
 						"ADILSON JOAO REIS JUNIOR", "ADRIAN MATEUS SOUSA SANTOS", "ADRIANA ALVES DO PRADO"));
