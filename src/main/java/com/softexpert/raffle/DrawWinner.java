@@ -21,16 +21,12 @@ public class DrawWinner {
 
 	private void buildWinner(List<String> participants, List<String> winners) {
 		String winnerCandidate = getRandomWinner(participants);
-		if (isUnique(winners, winnerCandidate))
+		if (!winners.contains(winnerCandidate))
 			winners.add(winnerCandidate);
 	}
 
 	private String getRandomWinner(List<String> participants) {
 		return participants.get(randomGenerator.nextInt(participants.size()));
-	}
-
-	private boolean isUnique(List<String> winners, String winnerCanditate) {
-		return !winners.contains(winnerCanditate);
 	}
 
 }
