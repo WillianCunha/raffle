@@ -26,8 +26,7 @@ public class DrawWinner {
 	}
 
 	private String getRandomWinner(List<String> participants) {
-		int randomNumber = randomGenerator.nextInt(participants.size());
-		return participants.get(randomNumber);
+		return participants.get(randomGenerator.nextInt(participants.size()));
 	}
 
 	private boolean isUnique(List<String> winners, String winnerCanditate) {

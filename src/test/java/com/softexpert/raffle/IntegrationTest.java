@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoRule;
 
 public class IntegrationTest {
 
@@ -51,15 +52,6 @@ public class IntegrationTest {
 		Collection<String> winners = drawWinner.buildWinners(nameList, 5);
 
 		MatcherAssert.assertThat(winners, Matchers.hasSize(5));
-	}
-
-	@Test
-	public void hundredWinnersDrawingSize() throws IOException {
-		File file = new File("src/test/resources/com/softexpert/name-list-02.txt");
-		List<String> nameList = fileReader.readFile(file);
-		Collection<String> winners = drawWinner.buildWinners(nameList, 100);
-
-		MatcherAssert.assertThat(winners, Matchers.hasSize(100));
 	}
 
 }
