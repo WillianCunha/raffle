@@ -14,9 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoRule;
 
-public class IntegrationTest {
+public class RaffleIT {
 
 	@InjectMocks
 	private DrawWinner drawWinner;
