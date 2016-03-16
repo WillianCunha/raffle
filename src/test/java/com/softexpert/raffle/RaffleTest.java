@@ -15,8 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.softexpert.exception.EmptyFileException;
-import com.softexpert.exception.LessThanOneException;
-import com.softexpert.exception.TooManyWinnersException;
+import com.softexpert.exception.MyException;
 
 public class RaffleTest {
 
@@ -31,8 +30,7 @@ public class RaffleTest {
 	}
 
 	@Test
-	public void simpleFileReaderOne()
-			throws IOException, LessThanOneException, TooManyWinnersException, EmptyFileException {
+	public void simpleFileReaderOne() throws IOException, MyException {
 		Mockito.when(drawWinner.buildWinners(Arrays.asList("A", "B", "c", "W", "ã"), 3))
 				.thenReturn(Arrays.asList("a", "c", "d"));
 		List<String> names = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-01.txt"), 3);
@@ -41,13 +39,12 @@ public class RaffleTest {
 	}
 
 	@Test(expected = EmptyFileException.class)
-	public void emptyFileReader()
-			throws LessThanOneException, TooManyWinnersException, IOException, EmptyFileException {
+	public void emptyFileReader() throws IOException, MyException {
 		raffle.readFile(new File("src/test/resources/com/softexpert/name-list-04.txt"), 1);
 	}
 
 	@Test(expected = IOException.class)
-	public void noFile() throws LessThanOneException, TooManyWinnersException, IOException, EmptyFileException {
+	public void noFile() throws IOException, MyException {
 		raffle.readFile(new File("src/test/resources/com/softexpert/name-list-00.txt"), 1);
 	}
 }

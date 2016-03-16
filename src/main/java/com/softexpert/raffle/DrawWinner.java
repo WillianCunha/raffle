@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import com.softexpert.exception.LessThanOneException;
+import com.softexpert.exception.MyException;
 import com.softexpert.exception.TooManyWinnersException;
 
 public class DrawWinner {
@@ -16,13 +17,11 @@ public class DrawWinner {
 		this.randomGenerator = randomGenerator;
 	}
 
-	public List<String> buildWinners(List<String> participants, int numberOfWinners)
-			throws LessThanOneException, TooManyWinnersException {
+	public List<String> buildWinners(List<String> participants, int numberOfWinners) throws MyException {
 		List<String> winners = new ArrayList<String>();
 		List<String> list = new ArrayList<>(participants);
-		if (numberOfWinners > list.size())
-			throw new TooManyWinnersException("Erro: muitos ganhadores.");
 		if (numberOfWinners >= 1) {
+			checkIfTooManyWinners(numberOfWinners, list);
 			for (int i = 0; i < numberOfWinners; i++) {
 				String winnerCandidate = getRandomWinner(list);
 				list = buildWithoutWinner(participants, winnerCandidate);
@@ -31,6 +30,12 @@ public class DrawWinner {
 			return winners;
 		}
 		throw new LessThanOneException("Erro: valor de ganhadores menor que um.");
+	}
+
+	private void checkIfTooManyWinners(int numberOfWinners, List<String> list) throws MyException {
+		if (numberOfWinners > list.size())
+			throw new TooManyWinnersException("Erro: muitos ganhadores: " + numberOfWinners
+					+ "\nInforme um valor menor ou igual a " + list.size() + " para o sorteio.");
 	}
 
 	private List<String> buildWithoutWinner(List<String> participants, String winnerCandidate) {

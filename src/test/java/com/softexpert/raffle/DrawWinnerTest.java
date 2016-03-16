@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.softexpert.exception.LessThanOneException;
+import com.softexpert.exception.MyException;
 import com.softexpert.exception.TooManyWinnersException;
 
 public class DrawWinnerTest {
@@ -34,7 +35,7 @@ public class DrawWinnerTest {
 	}
 
 	@Test
-	public void twoWinnerDrawingStatic() throws LessThanOneException, TooManyWinnersException {
+	public void twoWinnerDrawingStatic() throws MyException {
 		Mockito.when(randomGenerator.nextInt(Mockito.anyInt())).thenReturn(0, 4);
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, 2);
 		MatcherAssert.assertThat(winners, Matchers.contains("ABNER MARCOS ORLAMUNDER", "ADRIANA ALVES DO PRADO"));
@@ -42,7 +43,7 @@ public class DrawWinnerTest {
 	}
 
 	@Test
-	public void sixWinnersDrawingStatic() throws LessThanOneException, TooManyWinnersException {
+	public void sixWinnersDrawingStatic() throws MyException {
 		Mockito.when(randomGenerator.nextInt(Mockito.anyInt())).thenReturn(0, 0, 0, 0, 0, 0);
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, 6);
 		MatcherAssert.assertThat(winners,
@@ -53,7 +54,7 @@ public class DrawWinnerTest {
 	}
 
 	@Test
-	public void duplicateWinnerDrawing() throws LessThanOneException, TooManyWinnersException {
+	public void duplicateWinnerDrawing() throws MyException {
 		Mockito.when(randomGenerator.nextInt(Mockito.anyInt())).thenReturn(1, 1);
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, 2);
 		MatcherAssert.assertThat(winners, Matchers.hasSize(2));
@@ -62,21 +63,21 @@ public class DrawWinnerTest {
 	}
 
 	@Test(expected = LessThanOneException.class)
-	public void zeroWinnerTest() throws LessThanOneException, TooManyWinnersException {
+	public void zeroWinnerTest() throws MyException {
 		int numberOfWinners = 0;
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, numberOfWinners);
 		MatcherAssert.assertThat(winners, Matchers.empty());
 	}
 
 	@Test(expected = LessThanOneException.class)
-	public void negativeWinnersTest() throws LessThanOneException, TooManyWinnersException {
+	public void negativeWinnersTest() throws MyException {
 		int numberOfWinners = -1;
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, numberOfWinners);
 		MatcherAssert.assertThat(winners, Matchers.empty());
 	}
 
 	@Test(expected = TooManyWinnersException.class)
-	public void tooManyWinnersTest() throws TooManyWinnersException, LessThanOneException {
+	public void tooManyWinnersTest() throws MyException {
 		int numberOfWinners = 10;
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, numberOfWinners);
 		MatcherAssert.assertThat(winners, Matchers.empty());
