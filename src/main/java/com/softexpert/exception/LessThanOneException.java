@@ -1,11 +1,12 @@
 package com.softexpert.exception;
 
-public class LessThanOneException extends NumberFormatException {
-	public void printZeroWinner() {
-		System.out.println("Número de ganhadores não pode ser zero.");
+public class LessThanOneException extends Exception {
+
+	private static final long serialVersionUID = -4159713829881657595L;
+
+	public LessThanOneException(String message) {
+		super(message);
 	}
 	
-	public void printNegativeWinner() {
-		System.out.println("Número de ganhadores não pode ser negativo.");
-	}
+	
 }

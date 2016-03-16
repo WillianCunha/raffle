@@ -10,6 +10,10 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import com.softexpert.exception.EmptyFileException;
+import com.softexpert.exception.LessThanOneException;
+import com.softexpert.exception.TooManyWinnersException;
+
 public class RaffleIT {
 
 	private Random random = new Random();
@@ -17,38 +21,66 @@ public class RaffleIT {
 	private Raffle raffle = new Raffle();
 
 	@Test
-	public void fiveWinnersDrawingFromFile() throws IOException {
-		List<String> candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-01.txt"), 5);
-		List<String> winners = drawWinner.buildWinners(candidates, 5);
+	public void fiveWinnersDrawingFromFile() {
+		List<String> candidates;
+		try {
+			candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-01.txt"), 5);
+			List<String> winners = drawWinner.buildWinners(candidates, 5);
+			MatcherAssert.assertThat(winners.get(0), Matchers.isIn(candidates));
+			MatcherAssert.assertThat(winners.get(1), Matchers.isIn(candidates));
+			MatcherAssert.assertThat(winners.get(2), Matchers.isIn(candidates));
+			MatcherAssert.assertThat(winners.get(3), Matchers.isIn(candidates));
+			MatcherAssert.assertThat(winners.get(4), Matchers.isIn(candidates));
+		} catch (IOException | LessThanOneException | TooManyWinnersException | EmptyFileException e) {
+			e.printStackTrace();
+		}
 
-		MatcherAssert.assertThat(winners.get(0), Matchers.isIn(candidates));
-		MatcherAssert.assertThat(winners.get(1), Matchers.isIn(candidates));
-		MatcherAssert.assertThat(winners.get(2), Matchers.isIn(candidates));
-		MatcherAssert.assertThat(winners.get(3), Matchers.isIn(candidates));
-		MatcherAssert.assertThat(winners.get(4), Matchers.isIn(candidates));
 	}
 
 	@Test
-	public void fiveWinnersDrawingSize() throws IOException {
+	public void fiveWinnersDrawingSize() {
 		File file = new File("src/test/resources/com/softexpert/name-list-02.txt");
-		List<String> nameList = raffle.readFile(file, 5);
-		Collection<String> winners = drawWinner.buildWinners(nameList, 5);
+		List<String> nameList;
 
-		MatcherAssert.assertThat(winners, Matchers.hasSize(5));
+		try {
+			nameList = raffle.readFile(file, 5);
+			Collection<String> winners = drawWinner.buildWinners(nameList, 5);
+			MatcherAssert.assertThat(winners, Matchers.hasSize(5));
+		} catch (IOException exception) {
+			exception.getMessage();
+		} catch (LessThanOneException | TooManyWinnersException | EmptyFileException exception) {
+			exception.printStackTrace();
+		}
+
 	}
 
 	@Test
-	public void hundredWinnersDrawingSize() throws IOException {
+	public void hundredWinnersDrawingSize() {
 		File file = new File("src/test/resources/com/softexpert/name-list-02.txt");
-		List<String> winners = raffle.readFile(file, 100);
-		MatcherAssert.assertThat(winners, Matchers.hasSize(100));
+		List<String> winners;
+
+		try {
+			winners = raffle.readFile(file, 100);
+			MatcherAssert.assertThat(winners, Matchers.hasSize(100));
+		} catch (IOException exception) {
+			exception.getMessage();
+		} catch (LessThanOneException | TooManyWinnersException | EmptyFileException exception) {
+			exception.printStackTrace();
+		}
 	}
 
 	@Test
-	public void OverThousandDrawingSize() throws IOException {
+	public void OverThousandDrawingSize() {
 		File file = new File("src/test/resources/com/softexpert/name-list-03.txt");
-		List<String> winners = raffle.readFile(file, 1113);
-		MatcherAssert.assertThat(winners, Matchers.hasSize(1113));
+		List<String> winners;
+		try {
+			winners = raffle.readFile(file, 1113);
+			MatcherAssert.assertThat(winners, Matchers.hasSize(1113));
+		} catch (IOException exception) {
+			exception.getMessage();
+		} catch (LessThanOneException | TooManyWinnersException | EmptyFileException exception) {
+			exception.printStackTrace();
+		}
 	}
 
 }
