@@ -15,7 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.softexpert.exception.EmptyFileException;
-import com.softexpert.exception.MyException;
+import com.softexpert.exception.RaffleException;
 
 public class RaffleTest {
 
@@ -30,7 +30,7 @@ public class RaffleTest {
 	}
 
 	@Test
-	public void simpleFileReaderOne() throws IOException, MyException {
+	public void simpleFileReaderOne() throws IOException, RaffleException {
 		Mockito.when(drawWinner.buildWinners(Arrays.asList("A", "B", "c", "W", "ã"), 3))
 				.thenReturn(Arrays.asList("a", "c", "d"));
 		List<String> names = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-01.txt"), 3);
@@ -39,12 +39,12 @@ public class RaffleTest {
 	}
 
 	@Test(expected = EmptyFileException.class)
-	public void emptyFileReader() throws IOException, MyException {
+	public void emptyFileReader() throws IOException, RaffleException {
 		raffle.readFile(new File("src/test/resources/com/softexpert/name-list-04.txt"), 1);
 	}
 
 	@Test(expected = IOException.class)
-	public void noFile() throws IOException, MyException {
+	public void noFile() throws IOException, RaffleException {
 		raffle.readFile(new File("src/test/resources/com/softexpert/name-list-00.txt"), 1);
 	}
 }

@@ -10,7 +10,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
-import com.softexpert.exception.MyException;
+import com.softexpert.exception.RaffleException;
 
 public class RaffleIT {
 
@@ -19,7 +19,7 @@ public class RaffleIT {
 	private Raffle raffle = new Raffle();
 
 	@Test
-	public void fiveWinnersDrawingFromFile() throws MyException, IOException {
+	public void fiveWinnersDrawingFromFile() throws RaffleException, IOException {
 		List<String> candidates;
 		candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-01.txt"), 5);
 		List<String> winners = drawWinner.buildWinners(candidates, 5);
@@ -31,7 +31,7 @@ public class RaffleIT {
 	}
 
 	@Test
-	public void fiveWinnersDrawingSize() throws MyException, IOException {
+	public void fiveWinnersDrawingSize() throws RaffleException, IOException {
 		File file = new File("src/test/resources/com/softexpert/name-list-02.txt");
 		List<String> nameList;
 
@@ -42,7 +42,7 @@ public class RaffleIT {
 	}
 
 	@Test
-	public void hundredWinnersDrawingSize() throws MyException, IOException {
+	public void hundredWinnersDrawingSize() throws RaffleException, IOException {
 		File file = new File("src/test/resources/com/softexpert/name-list-02.txt");
 		List<String> winners;
 
@@ -51,12 +51,12 @@ public class RaffleIT {
 	}
 
 	@Test
-	public void OverThousandDrawingSize() throws MyException, IOException {
+	public void OverThousandDrawingSize() throws RaffleException, IOException {
 		File file = new File("src/test/resources/com/softexpert/name-list-03.txt");
-		
 		List<String> winners;
-			winners = raffle.readFile(file, 1113);
-			MatcherAssert.assertThat(winners, Matchers.hasSize(1113));
+		
+		winners = raffle.readFile(file, 1113);
+		MatcherAssert.assertThat(winners, Matchers.hasSize(1113));
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.Random;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.softexpert.exception.EmptyFileException;
-import com.softexpert.exception.MyException;
+import com.softexpert.exception.RaffleException;
 
 public class Raffle {
 
@@ -22,7 +22,7 @@ public class Raffle {
 		this.drawWinner = drawWinner;
 	}
 
-	public List<String> readFile(File file, int numberOfWinners) throws MyException, IOException {
+	public List<String> readFile(File file, int numberOfWinners) throws RaffleException, IOException {
 		List<String> participants = Files.readLines(file, Charsets.UTF_8);
 		checkForValidFile(participants);
 		
