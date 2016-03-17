@@ -38,7 +38,6 @@ public class RaffleIT {
 		nameList = raffle.readFile(file, 5);
 		Collection<String> winners = drawWinner.buildWinners(nameList, 5);
 		MatcherAssert.assertThat(winners, Matchers.hasSize(5));
-
 	}
 
 	@Test
@@ -58,5 +57,4 @@ public class RaffleIT {
 		winners = raffle.readFile(file, 1113);
 		MatcherAssert.assertThat(winners, Matchers.hasSize(1113));
 	}
-
 }

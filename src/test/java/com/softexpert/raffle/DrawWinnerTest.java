@@ -36,7 +36,7 @@ public class DrawWinnerTest {
 
 	@Test
 	public void twoWinnerDrawingStatic() throws RaffleException {
-		Mockito.when(randomGenerator.nextInt(Mockito.anyInt())).thenReturn(0, 5);
+		Mockito.when(randomGenerator.nextInt(Mockito.anyInt())).thenReturn(0, 4);
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, 2);
 		MatcherAssert.assertThat(winners, Matchers.contains("ABNER MARCOS ORLAMUNDER", "ADRIANA ALVES DO PRADO"));
 		Mockito.verify(randomGenerator, Mockito.times(2)).nextInt(Mockito.anyInt());
@@ -44,8 +44,7 @@ public class DrawWinnerTest {
 
 	@Test
 	public void sixWinnersDrawingStatic() throws RaffleException {
-//		Mockito.when(randomGenerator.nextInt(Mockito.anyInt())).thenReturn(0, 0, 0, 0, 0, 0);
-		Mockito.when(randomGenerator.nextInt(Mockito.anyInt())).thenReturn(0, 1, 2, 3, 4, 5);
+		Mockito.when(randomGenerator.nextInt(Mockito.anyInt())).thenReturn(0, 0, 0, 0, 0, 0);
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, 6);
 		MatcherAssert.assertThat(winners,
 				Matchers.anyOf(Matchers.hasItem("ABNER MARCOS ORLAMUNDER"), Matchers.hasItem("ABRAAO PUZAK"),
@@ -54,9 +53,7 @@ public class DrawWinnerTest {
 		Mockito.verify(randomGenerator, Mockito.times(6)).nextInt(Mockito.anyInt());
 	}
 
-	// Acho que esse teste não passa porque nunca vai atender ao numberOfWinners,
-	// coloquei esse AssertionError pra passar o teste
-	@Test(expected = AssertionError.class)
+	@Test
 	public void duplicateWinnerDrawing() throws RaffleException {
 		Mockito.when(randomGenerator.nextInt(Mockito.anyInt())).thenReturn(1, 1);
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, 2);
