@@ -39,11 +39,11 @@ public class DrawWinner {
 		List<String> eligiblesForDrawing = new ArrayList<String>(participants);
 		List<String> winners = new ArrayList<String>();
 		for (int i = 0; i < numberOfWinners; i++) 
-			removeWinner(eligiblesForDrawing, winners);
+			removeAndDrawWinner(eligiblesForDrawing, winners);
 		return winners;
 	}
 	
-	private void removeWinner(List<String> participants, List<String> winners) {
+	private void removeAndDrawWinner(List<String> participants, List<String> winners) {
 		String winnerCandidate = getRandomWinner(participants);
 		if (participants.removeIf(participant -> participant.equalsIgnoreCase(winnerCandidate)))
 			winners.add(winnerCandidate);
