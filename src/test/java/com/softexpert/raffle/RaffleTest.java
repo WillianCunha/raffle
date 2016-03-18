@@ -1,7 +1,6 @@
 package com.softexpert.raffle;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class RaffleTest {
 	}
 
 	@Test
-	public void simpleFileReaderOne() throws IOException, RaffleException {
+	public void simpleFileReaderOne() throws RaffleException {
 		Mockito.when(drawWinner.buildWinners(Arrays.asList("A", "B", "c", "W", "ã"), 3))
 				.thenReturn(Arrays.asList("a", "c", "d"));
 		List<String> candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-01.txt"), 3);
@@ -37,13 +36,13 @@ public class RaffleTest {
 		Mockito.verify(drawWinner).buildWinners(Arrays.asList("A", "B", "c", "W", "ã"), 3);
 	}
 
-	@Test(expected = IOException.class)
-	public void emptyFileReader() throws IOException, RaffleException {
+	@Test(expected = RaffleException.class)
+	public void emptyFileReader() throws RaffleException {
 		raffle.readFile(new File("src/test/resources/com/softexpert/name-list-04.txt"), 1);
 	}
 
-	@Test(expected = IOException.class)
-	public void noFile() throws IOException, RaffleException {
+	@Test(expected = RaffleException.class)
+	public void noFile() throws RaffleException {
 		raffle.readFile(new File("src/test/resources/com/softexpert/name-list-00.txt"), 1);
 	}
 }

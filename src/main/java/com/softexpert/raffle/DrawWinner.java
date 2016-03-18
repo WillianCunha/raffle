@@ -18,16 +18,15 @@ public class DrawWinner {
 	}
 
 	public List<String> buildWinners(List<String> participants, int numberOfWinners) throws RaffleException {
-		if (numberOfWinners >= 1) {
+		if (numberOfWinners >= 1)
 			return checkIfTooManyWinners(participants, numberOfWinners);
-		}
 		throw new LessThanOneWinnerException("Erro: valor de ganhadores menor que um.");
 	}
 
 	private List<String> checkIfTooManyWinners(List<String> participants, int numberOfWinners) throws RaffleException {
-		if (numberOfWinners <= participants.size()) {
+		if (numberOfWinners <= participants.size())
 			return buildFinalWinnersList(participants, numberOfWinners);
-		} else
+		else
 			throw new TooManyWinnersException("Erro: muitos ganhadores: " + numberOfWinners
 					+ "\nInforme um valor menor ou igual a " + participants.size() + " para o sorteio.");
 	}
@@ -38,17 +37,15 @@ public class DrawWinner {
 	}
 
 	private List<String> buildWithoutWinner(List<String> participants, String winnerCandidate) {
-		return participants.stream().filter(winner -> !winner
-				.equalsIgnoreCase(winnerCandidate))
+		return participants.stream().filter(winner -> !winner.equalsIgnoreCase(winnerCandidate))
 				.collect(Collectors.toList());
 	}
-	
-	private List<String> buildFinalWinnersList(List<String> participants, int numberOfWinners)  {
+
+	private List<String> buildFinalWinnersList(List<String> participants, int numberOfWinners) {
 		List<String> winners = new ArrayList<String>();
-		List<String> auxList = participants;
 		for (int i = 0; i < numberOfWinners; i++) {
-			String winnerCandidate = getRandomWinner(auxList);
-			auxList = buildWithoutWinner(auxList, winnerCandidate);
+			String winnerCandidate = getRandomWinner(participants);
+			participants = buildWithoutWinner(participants, winnerCandidate);
 			winners.add(winnerCandidate);
 		}
 		return winners;

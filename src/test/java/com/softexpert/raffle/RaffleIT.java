@@ -30,21 +30,21 @@ public class RaffleIT {
 	}
 
 	@Test
-	public void fiveWinnersDrawingSize() throws RaffleException, IOException {
+	public void fiveWinnersDrawingSize() throws RaffleException {
 		List<String> candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-02.txt"), 5);
 		Collection<String> winners = drawWinner.buildWinners(candidates, 5);
 		MatcherAssert.assertThat(winners, Matchers.hasSize(5));
 	}
 
 	@Test
-	public void hundredWinnersDrawingSize() throws RaffleException, IOException {
+	public void hundredWinnersDrawingSize() throws RaffleException {
 		List<String> candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-02.txt"), 100);
 		Collection<String> winners = drawWinner.buildWinners(candidates, 100);
 		MatcherAssert.assertThat(winners, Matchers.hasSize(100));
 	}
 
 	@Test
-	public void OverThousandDrawingSize() throws RaffleException, IOException {
+	public void OverThousandDrawingSize() throws RaffleException {
 		List<String> candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-03.txt"), 1113);
 		Collection<String> winners = drawWinner.buildWinners(candidates, 1113);
 		MatcherAssert.assertThat(winners, Matchers.hasSize(1113));

@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import com.softexpert.exception.InvalidFileException;
 import com.softexpert.exception.RaffleException;
 
 public class Raffle {
@@ -21,15 +22,20 @@ public class Raffle {
 		this.drawWinner = drawWinner;
 	}
 
-	public List<String> readFile(File file, int numberOfWinners) throws IOException, RaffleException {
-		List<String> participants = Files.readLines(file, Charsets.UTF_8);
+	public List<String> readFile(File file, int numberOfWinners) throws RaffleException {
+		List<String> participants;
+		try {
+			participants = Files.readLines(file, Charsets.UTF_8);
+		} catch (IOException exception) {
+			throw new InvalidFileException("Erro: Arquivo inválido ou inexistente.", exception);
+		}
 		checkForValidFile(participants);
 		
 		return drawWinner.buildWinners(participants, numberOfWinners);
 	}
 
-	private void checkForValidFile(List<String> participants) throws IOException {
+	private void checkForValidFile(List<String> participants) throws RaffleException {
 		if (participants.isEmpty())
-			throw new IOException("Erro: Problema de leitura ou arquivo vazio.");
+			throw new InvalidFileException("Erro: Arquivo inválido ou inexistente.");
 	}
 }

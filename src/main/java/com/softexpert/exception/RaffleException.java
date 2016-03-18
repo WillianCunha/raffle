@@ -7,4 +7,9 @@ public class RaffleException extends Exception {
 	public RaffleException(String message) {
 		super(message);
 	}
+
+	public RaffleException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	
 }
