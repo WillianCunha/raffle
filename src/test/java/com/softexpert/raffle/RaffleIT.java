@@ -10,6 +10,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import com.softexpert.exception.RaffleException;
+
 public class RaffleIT {
 
 	private Random random = new Random();
@@ -17,10 +19,9 @@ public class RaffleIT {
 	private Raffle raffle = new Raffle();
 
 	@Test
-	public void fiveWinnersDrawingFromFile() throws IOException {
+	public void fiveWinnersDrawingFromFile() throws RaffleException, IOException {
 		List<String> candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-01.txt"), 5);
 		List<String> winners = drawWinner.buildWinners(candidates, 5);
-
 		MatcherAssert.assertThat(winners.get(0), Matchers.isIn(candidates));
 		MatcherAssert.assertThat(winners.get(1), Matchers.isIn(candidates));
 		MatcherAssert.assertThat(winners.get(2), Matchers.isIn(candidates));
@@ -29,26 +30,23 @@ public class RaffleIT {
 	}
 
 	@Test
-	public void fiveWinnersDrawingSize() throws IOException {
-		File file = new File("src/test/resources/com/softexpert/name-list-02.txt");
-		List<String> nameList = raffle.readFile(file, 5);
-		Collection<String> winners = drawWinner.buildWinners(nameList, 5);
-
+	public void fiveWinnersDrawingSize() throws RaffleException {
+		List<String> candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-02.txt"), 5);
+		Collection<String> winners = drawWinner.buildWinners(candidates, 5);
 		MatcherAssert.assertThat(winners, Matchers.hasSize(5));
 	}
 
 	@Test
-	public void hundredWinnersDrawingSize() throws IOException {
-		File file = new File("src/test/resources/com/softexpert/name-list-02.txt");
-		List<String> winners = raffle.readFile(file, 100);
+	public void hundredWinnersDrawingSize() throws RaffleException {
+		List<String> candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-02.txt"), 100);
+		Collection<String> winners = drawWinner.buildWinners(candidates, 100);
 		MatcherAssert.assertThat(winners, Matchers.hasSize(100));
 	}
 
 	@Test
-	public void OverThousandDrawingSize() throws IOException {
-		File file = new File("src/test/resources/com/softexpert/name-list-03.txt");
-		List<String> winners = raffle.readFile(file, 1113);
+	public void OverThousandDrawingSize() throws RaffleException {
+		List<String> candidates = raffle.readFile(new File("src/test/resources/com/softexpert/name-list-03.txt"), 1113);
+		Collection<String> winners = drawWinner.buildWinners(candidates, 1113);
 		MatcherAssert.assertThat(winners, Matchers.hasSize(1113));
 	}
-
 }
