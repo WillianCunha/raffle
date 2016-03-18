@@ -26,12 +26,12 @@ public class Raffle {
 		List<String> participants;
 		try {
 			participants = Files.readLines(file, Charsets.UTF_8);
+			checkForValidFile(participants);
+			return drawWinner.buildWinners(participants, numberOfWinners);
 		} catch (IOException exception) {
 			throw new InvalidFileException("Erro: Arquivo inválido ou inexistente.", exception);
 		}
-		checkForValidFile(participants);
-		
-		return drawWinner.buildWinners(participants, numberOfWinners);
+
 	}
 
 	private void checkForValidFile(List<String> participants) throws RaffleException {

@@ -3,7 +3,6 @@ package com.softexpert.raffle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import com.softexpert.exception.LessThanOneWinnerException;
 import com.softexpert.exception.RaffleException;
@@ -26,9 +25,9 @@ public class DrawWinner {
 	private List<String> checkIfTooManyWinners(List<String> participants, int numberOfWinners) throws RaffleException {
 		if (numberOfWinners <= participants.size())
 			return buildFinalWinnersList(participants, numberOfWinners);
-		else
-			throw new TooManyWinnersException("Erro: muitos ganhadores: " + numberOfWinners
-					+ "\nInforme um valor menor ou igual a " + participants.size() + " para o sorteio.");
+
+		throw new TooManyWinnersException("Erro: muitos ganhadores: " + numberOfWinners
+				+ "\nInforme um valor menor ou igual a " + participants.size() + " para o sorteio.");
 	}
 
 	private String getRandomWinner(List<String> participants) {
@@ -36,17 +35,13 @@ public class DrawWinner {
 		return participants.get(position);
 	}
 
-	private List<String> buildWithoutWinner(List<String> participants, String winnerCandidate) {
-		return participants.stream().filter(winner -> !winner.equalsIgnoreCase(winnerCandidate))
-				.collect(Collectors.toList());
-	}
-
 	private List<String> buildFinalWinnersList(List<String> participants, int numberOfWinners) {
 		List<String> winners = new ArrayList<String>();
+		List<String> auxList = new ArrayList<String>(participants);
 		for (int i = 0; i < numberOfWinners; i++) {
-			String winnerCandidate = getRandomWinner(participants);
-			participants = buildWithoutWinner(participants, winnerCandidate);
-			winners.add(winnerCandidate);
+			String winnerCandidate = getRandomWinner(auxList);
+			if (auxList.removeIf(participant -> participant.equalsIgnoreCase(winnerCandidate)))
+				winners.add(winnerCandidate);
 		}
 		return winners;
 	}
