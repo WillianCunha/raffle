@@ -1,10 +1,10 @@
 package com.softexpert.exception;
 
-public class LessThanOneException extends RaffleException {
+public class LessThanOneWinnerException extends RaffleException {
 
 	private static final long serialVersionUID = -4159713829881657595L;
 
-	public LessThanOneException(String message) {
+	public LessThanOneWinnerException(String message) {
 		super(message);
 	}
 	

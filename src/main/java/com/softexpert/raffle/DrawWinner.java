@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import com.softexpert.exception.LessThanOneException;
+import com.softexpert.exception.LessThanOneWinnerException;
 import com.softexpert.exception.RaffleException;
 import com.softexpert.exception.TooManyWinnersException;
 
@@ -21,7 +21,7 @@ public class DrawWinner {
 		if (numberOfWinners >= 1) {
 			return checkIfTooManyWinners(participants, numberOfWinners);
 		}
-		throw new LessThanOneException("Erro: valor de ganhadores menor que um.");
+		throw new LessThanOneWinnerException("Erro: valor de ganhadores menor que um.");
 	}
 
 	private List<String> checkIfTooManyWinners(List<String> participants, int numberOfWinners) throws RaffleException {

@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.softexpert.exception.LessThanOneException;
+import com.softexpert.exception.LessThanOneWinnerException;
 import com.softexpert.exception.RaffleException;
 import com.softexpert.exception.TooManyWinnersException;
 
@@ -62,25 +62,24 @@ public class DrawWinnerTest {
 		Mockito.verify(randomGenerator, Mockito.times(2)).nextInt(Mockito.anyInt());
 	}
 
-	@Test(expected = LessThanOneException.class)
-	public void zeroWinnerTest() throws RaffleException {
+	@Test(expected = LessThanOneWinnerException.class)
+	public void zeroWinner() throws RaffleException {
 		int numberOfWinners = 0;
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, numberOfWinners);
 		MatcherAssert.assertThat(winners, Matchers.empty());
 	}
 
-	@Test(expected = LessThanOneException.class)
-	public void negativeWinnersTest() throws RaffleException {
+	@Test(expected = LessThanOneWinnerException.class)
+	public void negativeWinners() throws RaffleException {
 		int numberOfWinners = -1;
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, numberOfWinners);
 		MatcherAssert.assertThat(winners, Matchers.empty());
 	}
 
 	@Test(expected = TooManyWinnersException.class)
-	public void tooManyWinnersTest() throws RaffleException {
+	public void tooManyWinners() throws RaffleException {
 		int numberOfWinners = 10;
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, numberOfWinners);
 		MatcherAssert.assertThat(winners, Matchers.empty());
 	}
-
 }
