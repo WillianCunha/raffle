@@ -23,8 +23,8 @@ public class Raffle {
 	}
 
 	public List<String> readFile(File file, int numberOfWinners) throws RaffleException {
-		List<String> participants;
 		try {
+			List<String> participants;
 			participants = Files.readLines(file, Charsets.UTF_8);
 			checkForValidFile(participants);
 			return drawWinner.buildWinners(participants, numberOfWinners);

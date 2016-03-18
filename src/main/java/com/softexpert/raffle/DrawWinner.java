@@ -37,12 +37,16 @@ public class DrawWinner {
 
 	private List<String> buildFinalWinnersList(List<String> participants, int numberOfWinners) {
 		List<String> winners = new ArrayList<String>();
-		List<String> auxList = new ArrayList<String>(participants);
+		buildWithoutWinner(participants, winners, numberOfWinners);
+		return winners;
+	}
+	
+	private void buildWithoutWinner(List<String> participants, List<String> winners, int numberOfWinners) {
+		List<String> mutableList = new ArrayList<String>(participants);
 		for (int i = 0; i < numberOfWinners; i++) {
-			String winnerCandidate = getRandomWinner(auxList);
-			if (auxList.removeIf(participant -> participant.equalsIgnoreCase(winnerCandidate)))
+			String winnerCandidate = getRandomWinner(mutableList);
+			if (mutableList.removeIf(participant -> participant.equalsIgnoreCase(winnerCandidate)))
 				winners.add(winnerCandidate);
 		}
-		return winners;
 	}
 }
