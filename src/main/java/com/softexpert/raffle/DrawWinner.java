@@ -25,7 +25,6 @@ public class DrawWinner {
 	private List<String> checkIfTooManyWinners(List<String> participants, int numberOfWinners) throws RaffleException {
 		if (numberOfWinners <= participants.size())
 			return buildFinalWinnersList(participants, numberOfWinners);
-
 		throw new TooManyWinnersException("Erro: muitos ganhadores: " + numberOfWinners
 				+ "\nInforme um valor menor ou igual a " + participants.size() + " para o sorteio.");
 	}
@@ -44,9 +43,13 @@ public class DrawWinner {
 	private void buildWithoutWinner(List<String> participants, List<String> winners, int numberOfWinners) {
 		List<String> mutableList = new ArrayList<String>(participants);
 		for (int i = 0; i < numberOfWinners; i++) {
-			String winnerCandidate = getRandomWinner(mutableList);
-			if (mutableList.removeIf(participant -> participant.equalsIgnoreCase(winnerCandidate)))
-				winners.add(winnerCandidate);
+			removeWinner(mutableList, winners);
 		}
+	}
+	
+	private void removeWinner(List<String> participants, List<String> winners) {
+		String winnerCandidate = getRandomWinner(participants);
+		if (participants.removeIf(participant -> participant.equalsIgnoreCase(winnerCandidate)))
+			winners.add(winnerCandidate);
 	}
 }
