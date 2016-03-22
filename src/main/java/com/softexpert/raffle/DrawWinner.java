@@ -6,7 +6,7 @@ import java.util.Random;
 
 import com.softexpert.exception.LessThanOneWinnerException;
 import com.softexpert.exception.RaffleException;
-import com.softexpert.exception.TooManyWinnersException;
+import com.softexpert.exception.TooManyNamesException;
 
 public class DrawWinner {
 
@@ -25,7 +25,7 @@ public class DrawWinner {
 	private List<String> checkIfTooManyWinners(List<String> participants, int numberOfWinners) throws RaffleException {
 		if (numberOfWinners <= participants.size())
 			return buildWithoutWinner(participants, numberOfWinners);
-		throw new TooManyWinnersException("Erro: muitos ganhadores: " + numberOfWinners
+		throw new TooManyNamesException("Erro: muitos ganhadores: " + numberOfWinners
 				+ "\nInforme um valor menor ou igual a " + participants.size() + " para o sorteio.");
 	}
 

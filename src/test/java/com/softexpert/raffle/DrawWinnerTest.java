@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 
 import com.softexpert.exception.LessThanOneWinnerException;
 import com.softexpert.exception.RaffleException;
-import com.softexpert.exception.TooManyWinnersException;
+import com.softexpert.exception.TooManyNamesException;
 
 public class DrawWinnerTest {
 
@@ -76,7 +76,7 @@ public class DrawWinnerTest {
 		MatcherAssert.assertThat(winners, Matchers.empty());
 	}
 
-	@Test(expected = TooManyWinnersException.class)
+	@Test(expected = TooManyNamesException.class)
 	public void tooManyWinners() throws RaffleException {
 		int numberOfWinners = 10;
 		Collection<String> winners = drawWinner.buildWinners(DEFAULT_NAMES_LIST, numberOfWinners);
