@@ -2,9 +2,8 @@ package com.softexpert.raffle;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -15,18 +14,12 @@ import com.softexpert.exception.RaffleException;
 public class RaffleIT {
 
 	private static final int FINAL_LIST_SIZE = 10000;
-	private Random random = new Random();
-	private DrawWinner drawWinner = new DrawWinner(random);
 	private Raffle raffle = new Raffle();
 
 	@Test
 	public void fiveWinnersDrawingFromFile() throws RaffleException, IOException {
 		List<String> winners = raffle.processFile(new File("src/test/resources/com/softexpert/name-list-01.txt"), 5);
-		MatcherAssert.assertThat(winners.get(0), Matchers.isIn(winners));
-		MatcherAssert.assertThat(winners.get(1), Matchers.isIn(winners));
-		MatcherAssert.assertThat(winners.get(2), Matchers.isIn(winners));
-		MatcherAssert.assertThat(winners.get(3), Matchers.isIn(winners));
-		MatcherAssert.assertThat(winners.get(4), Matchers.isIn(winners));
+		MatcherAssert.assertThat(winners, Matchers.containsInAnyOrder("A", "B", "c", "W", "ã"));
 	}
 
 	@Test
