@@ -22,9 +22,9 @@ public class Raffle {
 		this.drawWinner = drawWinner;
 	}
 	
-	public List<String> processFile(File file, int numberOfWinners) throws RaffleException {
+	public List<String> processWinners(String filePath, int numberOfWinners) throws RaffleException {
 		try {
-			List<String> participants = Files.readLines(file, Charsets.UTF_8);
+			List<String> participants = Files.readLines(new File(filePath), Charsets.UTF_8);
 			checkForValidFile(participants);
 			return drawWinner.buildWinners(participants, numberOfWinners);
 		} catch (IOException exception) {
