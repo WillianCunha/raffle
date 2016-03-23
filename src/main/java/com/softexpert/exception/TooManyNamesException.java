@@ -1,10 +1,10 @@
 package com.softexpert.exception;
 
-public class TooManyWinnersException extends RaffleException {
+public class TooManyNamesException extends RaffleException {
 
 	private static final long serialVersionUID = 6553754888628091066L;
 
-	public TooManyWinnersException(String message) {
+	public TooManyNamesException(String message) {
 		super(message);
 	}
 
